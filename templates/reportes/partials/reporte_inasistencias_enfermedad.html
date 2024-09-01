@@ -1,0 +1,17 @@
+<div class="bg-white shadow-lg rounded-xl p-8">
+    <h3 class="text-3xl font-bold mb-6 text-gray-800">Reporte de Inasistencias por Enfermedad</h3>
+    <p class="mb-6 text-gray-600 text-lg">Período: {{ fecha_inicio }} - {{ fecha_fin }}</p>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {% for inasistencia in inasistencias %}
+        <div
+            class="bg-gradient-to-br from-blue-50 to-gray-100 rounded-lg p-6 shadow-md transition-all duration-300 hover:shadow-xl">
+            <h4 class="text-xl font-semibold mb-3 text-gray-700">{{ inasistencia.niño__jardin__nombre }}</h4>
+            <div class="flex items-center">
+                <span class="text-4xl font-bold text-gray-600">{{ inasistencia.total }}</span>
+                <span class="ml-2 text-gray-600">inasistencias</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

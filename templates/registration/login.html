@@ -1,0 +1,72 @@
+{% extends 'login_forms.html' %}
+{% load custom_filters %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+
+<div
+    class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg transform transition duration-500 hover:scale-105">
+    <!-- Card Header -->
+    <div class="space-y-1 p-4">
+        <h2 class="text-2xl text-center font-bold">Iniciar Sesión</h2>
+        <p class="text-center text-sm text-gray-600">
+            Ingrese sus credenciales para acceder al sistema
+        </p>
+    </div>
+
+    <!-- Card Content -->
+    <div class="p-4">
+        <form method="post">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="mb-4 p-2 bg-red-100 border border-red-400 text-red-700 rounded">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="grid gap-2">
+                <label for="username" class="block text-sm font-medium text-gray-700">Nombre de Usuario</label>
+                {{ form.username|add_class:"block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" }}
+                {% if form.username.errors %}
+                    <div class="text-red-500 text-sm mt-1">
+                        {% for error in form.username.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="grid gap-2 mt-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                <div class="relative">
+                    {{ form.password|add_class:"block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" }}
+                    <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400"
+                        onclick="togglePasswordVisibility('{{ form.password.id_for_label }}')">
+                        <i class="fas fa-eye-slash"></i>
+                    </button>
+                </div>
+                {% if form.password.errors %}
+                    <div class="text-red-500 text-sm mt-1">
+                        {% for error in form.password.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <button class="w-full mt-4 bg-primary hover:bg-[#669f26] text-white font-bold py-2 px-4 rounded"
+                type="submit">
+                <i class="fas fa-sign-in-alt mr-2"></i>
+                Iniciar Sesión
+            </button>
+        </form>
+    </div>
+
+    <!-- Card Footer -->
+    <div class="p-4 flex flex-col">
+        <div class="mt-2 text-center text-sm text-gray-600">
+            ¿No tiene una cuenta? <a href="/register" class="text-primary hover:underline">Registrarse</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

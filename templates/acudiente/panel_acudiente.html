@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="container mx-auto p-4 md:p-8">
+    <h1 class="text-3xl font-bold mb-6">Panel del Acudiente</h1>
+    <div class="bg-white shadow-md rounded-lg mb-6">
+        <div class="p-4 border-b">
+            <h2 class="text-xl font-semibold">Seleccionar Niño</h2>
+            <p class="text-gray-600">Elija un niño para ver su avance académico</p>
+        </div>
+        <div class="p-4">
+            <select id="childSelect" name="niño" hx-get="{% url 'panel_acudiente' %}" hx-target="#avance"
+                hx-trigger="change"
+                class="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+                <option value="" disabled selected>Seleccionar niño</option>
+                {%for niño in niños%}
+                <option value="{{niño.pk}}">{{niño.nombre}}</option>
+                {%endfor%}
+            </select>
+        </div>
+    </div>
+
+    <div class="space-y-4">
+        <div class="border-b">
+            <div class="flex space-x-4">
+                <button onclick="showTab('avance')"
+                    class="text-gray-700 px-4 py-2 border-b-2 border-transparent hover:border-primary">Avance
+                    Académico</button>
+                <button onclick="showTab('publicaciones')" hx-get="{% url 'panel_acudiente' %}?publicacion=true"
+                    hx-target="#publicaciones-content"
+                    class="text-gray-700 px-4 py-2 border-b-2 border-transparent hover:border-primary">Publicaciones
+                    ICBF</button>
+            </div>
+        </div>
+        <div id="avance" class="hidden">
+            {%include 'acudiente/partials/avance_academico.html'%}
+        </div>
+        <div id="publicaciones" class="hidden">
+            <div class="bg-white shadow-md rounded-lg">
+                <div class="p-4 border-b">
+                    <h2 class="text-xl font-semibold">Publicaciones ICBF</h2>
+                    <p class="text-gray-600">Últimas publicaciones y recursos del ICBF</p>
+                </div>
+                <div class="p-4">
+                    <div class="space-y-4" id="publicaciones-content">
+                        {%include 'partials/lista_publicaciones.html'%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showTab(tabId) {
+        const tabs = ['avance', 'publicaciones'];
+        tabs.forEach(tab => {
+            document.querySelector(`#${tab}`).classList.add('hidden');
+        });
+        document.querySelector(`#${tabId}`).classList.remove('hidden');
+
+        const tabButtons = document.querySelectorAll('button.border-b-2');
+        tabButtons.forEach(button => {
+            button.classList.remove('border-primary');
+            button.classList.add('border-transparent');
+        });
+
+        const currentButton = document.querySelector(`button[onclick="showTab('${tabId}')"]`);
+        currentButton.classList.add('border-primary');
+        currentButton.classList.remove('border-transparent');
+    }
+
+    // Muestra la pestaña "avance Académico" por defecto
+    document.addEventListener('DOMContentLoaded', () => {
+        showTab('avance');
+    });
+</script>
+
+{% endblock %}

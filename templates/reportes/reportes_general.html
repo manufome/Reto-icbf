@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="flex-1 space-y-4 p-4 md:p-8 pt-6">
+    <div class="flex items-center justify-between space-y-2">
+        <h2 class="text-3xl font-bold tracking-tight">Reportes</h2>
+    </div>
+    <div class="space-y-4">
+        <!-- Tabs Navigation -->
+        <div class="border-b border-gray-200">
+            <div class="flex space-x-4">
+                <button
+                    class="px-4 py-2 font-medium text-sm text-gray-600 hover:text-gray-800 border-b-2 border-transparent hover:border-primary transition-colors duration-200 text-primary border-b-2 border-primary"
+                    data-tab-target="#asistencia-semanal">Asistencia Semanal</button>
+                <button
+                    class="px-4 py-2 font-medium text-sm text-gray-600 hover:text-gray-800 border-b-2 border-transparent hover:border-primary transition-colors duration-200"
+                    data-tab-target="#inasistencias-enfermedad">Inasistencias por Enfermedad</button>
+                <button
+                    class="px-4 py-2 font-medium text-sm text-gray-600 hover:text-gray-800 border-b-2 border-transparent hover:border-primary transition-colors duration-200"
+                    data-tab-target="#niños-por-jardin">Niños por Jardín</button>
+                <button
+                    class="px-4 py-2 font-medium text-sm text-gray-600 hover:text-gray-800 border-b-2 border-transparent hover:border-primary transition-colors duration-200"
+                    data-tab-target="#jardines-no-aprobados">Jardines No Aprobados</button>
+            </div>
+        </div>
+
+        <!-- Tabs Content -->
+        <div id="asistencia-semanal" class="space-y-4">
+            {% include "reportes/partials/reporte_semanal_asistencia.html" %}
+        </div>
+        <div id="inasistencias-enfermedad" class="space-y-4 hidden">
+            {% include "reportes/partials/reporte_inasistencias_enfermedad.html" %}
+        </div>
+        <div id="niños-por-jardin" class="space-y-4 hidden">
+            {% include "reportes/partials/reporte_niños_por_jardin.html" %}
+        </div>
+        <div id="jardines-no-aprobados" class="space-y-4 hidden">
+            {% include "reportes/partials/reporte_jardines_no_aprobados.html" %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabs = document.querySelectorAll('[data-tab-target]');
+        const tabContents = document.querySelectorAll('[id^="asistencia-"], [id^="inasistencias-"], [id^="niños-"], [id^="jardines-"]');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = document.querySelector(tab.dataset.tabTarget);
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                target.classList.remove('hidden');
+                tabs.forEach(t => t.classList.remove('text-primary', 'border-b-2', 'border-primary'));
+                tab.classList.add('text-primary', 'border-b-2', 'border-primary');
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+
+        .header {
+            background-color: #FFC107;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4a4a4a;
+            margin-bottom: 20px;
+        }
+
+        .mensaje {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .imagen {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://www.icbf.gov.co/sites/default/files/icbf-logo.png" alt="Logo ICBF" class="imagen"
+                style="max-width: 150px;">
+        </div>
+        <div class="content">
+            <h1>¡Feliz Cumpleaños, {{ nombre_niño }}!</h1>
+            <div class="mensaje">
+                <p>Estimado/a {{ nombre_acudiente }},</p>
+                <p>Hoy es un día muy especial para {{ nombre_niño }}. Le deseamos un cumpleaños lleno de alegría, risas
+                    y momentos inolvidables.</p>
+                <img src="https://media.tenor.com/mH1hCr-2eHgAAAAi/feliz-cumpleanos.gif" alt="Feliz Cumpleaños"
+                    class="imagen">
+                <p>Que este nuevo año de vida esté lleno de amor, aprendizaje y crecimiento.</p>
+                <p>¡Felicidades!</p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Atentamente,<br>El equipo de ICBF</p>
+        </div>
+    </div>
+</body>
+
+</html>

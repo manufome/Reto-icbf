@@ -1,0 +1,32 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    {% tailwind_css %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body class="flex items-center justify-center h-screen bg-cover bg-center bg-gradient-to-l from-[#a4d869] to-[#4d7e2b]">
+    {% block content %}
+    {% endblock %}
+</body>
+<script>
+    function togglePasswordVisibility(id) {
+        const passwordInput = document.getElementById(id);
+        const eyeIcon = passwordInput.nextElementSibling.querySelector('i');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
+        }
+    }
+</script>

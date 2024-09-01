@@ -1,0 +1,151 @@
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% tailwind_css %}
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <title>{% block title %}ICBF Management{% endblock %}</title>
+</head>
+
+<body class="flex flex-col h-screen overflow-hidden">
+    <header class="bg-white shadow-sm border-b z-10 relative">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 justify-between items-center">
+                <div class="flex items-center">
+                    <img src="https://www.icbf.gov.co/sites/default/files/icbf-logo.png" alt="Logo ICBF"
+                        class="mr-2 h-8 w-8" />
+                    <span class="text-lg font-bold text-primary">ICBF Management</span>
+                </div>
+                <a href="{% url 'configuration' %}">
+                    <div class="flex items-center">
+                        <span class="text-gray-600 text-sm font-medium">{{ user.first_name }}</span>
+                        <img src="https://ui-avatars.com/api/?name={{ user.first_name }}+{{ user.last_name }}&background=random"
+                            alt="Avatar" class="h-8 w-8 rounded-full ml-2">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="flex flex-1 overflow-hidden">
+        <aside class="hidden w-64 overflow-y-auto bg-white md:block border-r">
+            <div class="py-4 px-3">
+                <nav class="space-y-5 ml-3">
+                    <ul>
+
+                        {% if user.is_administrador %}
+                        <li
+                            class="{% if 'dashboard' in request.path %}bg-gray-200 text-primary p-2 rounded{% else %}hover:bg-gray-200 hover:text-primary p-2 rounded{% endif %}">
+                            <a href="{% url 'dashboard' %}" class="w-full justify-start flex items-center">
+                                <i class="fas fa-tachometer-alt mr-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li
+                            class="{% if 'reportes' in request.path %}bg-gray-200 text-primary p-2 rounded{% else %}hover:bg-gray-200 hover:text-primary p-2 rounded{% endif %}">
+                            <a href="{% url 'reportes_general' %}" class="w-full justify-start flex items-center">
+                                <i class="fas fa-chart-line mr-2"></i>
+                                Reportes
+                            </a>
+                        </li>
+                        <li
+                            class="{% if 'niños' in request.path %}bg-gray-200 text-primary p-2 rounded{% else %}hover:bg-gray-200 hover:text-primary p-2 rounded{% endif %}">
+                            <a href="{% url 'lista_niños' %}" class="w-full justify-start flex items-center">
+                                <i class="fas fa-users mr-2"></i>
+                                Niños
+                            </a>
+                        </li>
+
+                        <li
+                            class="{% if 'usuarios' in request.path %}bg-gray-200 text-primary p-2 rounded{% else %}hover:bg-gray-200 hover:text-primary p-2 rounded{% endif %}">
+                            <a href="{% url 'lista_usuarios' %}" class="w-full justify-start flex items-center">
+                                <i class="fas fa-user-friends mr-2"></i>
+                                Usuarios
+                            </a>
+                        </li>
+                        <li
+                            class="{% if 'jardin' in request.path %}bg-gray-200 text-primary p-2 rounded{% else %}hover:bg-gray-200 hover:text-primary p-2 rounded{% endif %}">
+                            <a href="{% url 'lista_jardines' %}" class="w-full justify-start flex items-center">
+                                <i class="fas fa-school mr-2"></i>
+                                Jardines Infantiles
+                            </a>
+                        </li>
+                        <li
+                            class="{% if 'publicaciones' in request.path %}bg-gray-200 text-primary p-2 rounded{% else %}hover:bg-gray-200 hover:text-primary p-2 rounded{% endif %}">
+                            <a href="{% url 'lista_publicaciones' %}" class="w-full justify-start flex items-center">
+                                <i class="fas fa-newspaper mr-2"></i>
+                                Publicaciones
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if user.is_madre_comunitaria %}
+                        <li
+                            class="{% if 'asistencia' in request.path %}bg-gray-200 text-primary p-2 rounded{% else %}hover:bg-gray-200 hover:text-primary p-2 rounded{% endif %}">
+                            <a href="{% url 'asistencia' %}" class="w-full justify-start flex items-center">
+                                <i class="fas fa-calendar-check mr-2"></i>
+                                Asistencia
+                            </a>
+                        </li>
+                        <li
+                            class="{% if 'avance_academico' in request.path %}bg-gray-200 text-primary p-2 rounded{% else %}hover:bg-gray-200 hover:text-primary p-2 rounded{% endif %}">
+                            <a href="{% url 'avance_academico' %}" class="w-full justify-start flex items-center">
+                                <i class="fas fa-book mr-2"></i>
+                                Avance académico
+                            </a>
+                        </li>
+                        <li
+                            class="{% if 'nuevas_publicaciones' in request.path %}bg-gray-200 text-primary p-2 rounded{% else %}hover:bg-gray-200 hover:text-primary p-2 rounded{% endif %}">
+                            <a href="{% url 'nuevas_publicaciones' %}" class="w-full justify-start flex items-center">
+                                <i class="fas fa-newspaper mr-2"></i>
+                                Publicaciones
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if user.is_acudiente %}
+                        <li
+                            class="{% if 'panel_acudiente' in request.path %}bg-gray-200 text-primary p-2 rounded{% else %}hover:bg-gray-200 hover:text-primary p-2 rounded{% endif %}">
+                            <a href="{% url 'panel_acudiente' %}" class="w-full justify-start flex items-center">
+                                <i class="fas fa-book mr-2"></i>
+                                Panel del acudiente
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        <li
+                            class="{% if 'config' in request.path %}bg-gray-200 text-primary p-2 rounded{% else %}hover:bg-gray-200 hover:text-primary p-2 rounded{% endif %}">
+                            <a href="{% url 'configuration' %}" class="w-full justify-start flex items-center">
+                                <i class="fas fa-cog mr-2"></i>
+                                Configuración
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="absolute bottom-0 w-full p-4">
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="justify-start text-red-500 flex items-center">
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        Cerrar Sesión
+                    </button>
+                </form>
+            </div>
+        </aside>
+        <main class="flex-1 overflow-y-auto bg-gray-100">
+            <!-- Django content block for dynamic content -->
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+    {% include "partials/toast.html" %}
+</body>
+{% block extra_js %}
+{% endblock %}
+
+</html>
