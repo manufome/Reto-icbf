@@ -239,10 +239,12 @@ def avance_academico(request):
         if jardin_id:
             niños = Niño.objects.filter(jardin_id=jardin_id)
             return render(request, 'madre/partials/select_niños.html', {'niños': niños})
+        elif 'jardin' in request.GET and not jardin_id:
+             return render(request, 'madre/partials/select_niños.html', {'niños': []})
         
         if niño_id:
             niño = get_object_or_404(Niño, pk=niño_id)
             avance_academico = AvanceAcademico.objects.filter(niño=niño)
             return render(request, 'madre/partials/info_niño_avance.html', {'avance_academico': avance_academico, 'niño': niño})
 
-    return render(request, 'madre/avance_academico.html', {'niños': niños, 'notas': notas, 'niveles': niveles, 'jardines': jardines})
+    return render(request, 'madre/avance_academico.html', {'niños': [], 'notas': notas, 'niveles': niveles, 'jardines': jardines})

@@ -7,9 +7,14 @@ from django.contrib.auth.models import Group
 from faker import Faker
 from datetime import timedelta
 from django.utils import timezone
+import unicodedata
 
 class Command(BaseCommand):
     help = 'Poblar la base de datos con datos simulados'
+
+    def remove_accents(self, text):
+        nfd_form = unicodedata.normalize('NFD', text)
+        return ''.join(char for char in nfd_form if unicodedata.category(char) != 'Mn')
 
     def handle(self, *args, **kwargs):
         self.stdout.write(
@@ -43,8 +48,10 @@ class Command(BaseCommand):
         for i in range(5):
             first_name = fake.first_name_female()
             last_name = fake.last_name()
-            email = f"{first_name.lower()}.{last_name.lower()}@example.com"
-            username = f"{first_name.lower()}.{last_name.lower()}"
+            first_name_clean = self.remove_accents(first_name.lower())
+            last_name_clean = self.remove_accents(last_name.lower())
+            email = f"{first_name_clean}.{last_name_clean}@example.com"
+            username = f"{first_name_clean}.{last_name_clean}"
             user = Usuario.objects.create_user(
                 username=username,
                 password='Prueba1234',
@@ -61,8 +68,10 @@ class Command(BaseCommand):
         for i in range(50):
             first_name = fake.first_name()
             last_name = fake.last_name()
-            email = f"{first_name.lower()}.{last_name.lower()}@example.com"
-            username = f"{first_name.lower()}.{last_name.lower()}"
+            first_name_clean = self.remove_accents(first_name.lower())
+            last_name_clean = self.remove_accents(last_name.lower())
+            email = f"{first_name_clean}.{last_name_clean}@example.com"
+            username = f"{first_name_clean}.{last_name_clean}"
             user = Usuario.objects.create_user(
                 username=username,
                 password='Prueba1234',

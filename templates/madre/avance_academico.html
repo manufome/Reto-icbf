@@ -27,13 +27,35 @@
                 <select id="childSelect" name="niño_id" hx-get="{% url 'avance_academico' %}" hx-target="#children-info"
                     hx-indicator="#loading"
                     class="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
-                    form="progress-form" required>
+                    form="progress-form" required disabled>
                     <option value="">Selecciona un niño</option>
                     {% for niño in niños %}
-                    <option value="{{ niño.id }}">{{ niño.nombre }} {{ niño.acudiente.last_name }} - {{
-                        niño.jardin.nombre }}</option>
+                    <option value="{{ niño.id }}">{{ niño.nombre }} {{ niño.acudiente.last_name }}</option>
                     {% endfor %}
                 </select>
+                <script>
+                    document.getElementById('jardin').addEventListener('change', function () {
+                        var childSelect = document.getElementById('childSelect');
+                        if (this.value) {
+                            childSelect.disabled = false;
+                        } else {
+                            childSelect.disabled = true;
+                            childSelect.value = "";
+                        }
+                    });
+
+                    document.body.addEventListener('htmx:afterSwap', function (evt) {
+                        if (evt.detail.target.id === 'childSelect') {
+                            var jardinSelect = document.getElementById('jardin');
+                            var childSelect = document.getElementById('childSelect');
+                            if (jardinSelect.value) {
+                                childSelect.disabled = false;
+                            } else {
+                                childSelect.disabled = true;
+                            }
+                        }
+                    });
+                </script>
             </div>
         </div>
         <!-- Tarjeta de Información del Niño -->
