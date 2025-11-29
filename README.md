@@ -91,3 +91,30 @@ Este proyecto es un sistema de gestión para jardines infantiles. Está diseñad
     ```
     python manage.py process_tasks
     ```
+
+## Capturas de Pantalla
+
+### Página de Inicio de Sesión
+Interfaz moderna y profesional para el acceso al sistema.
+
+![Login](screenshots/login.png)
+
+### Dashboard Administrativo
+Vista general con estadísticas de niños registrados, jardines infantiles, madres comunitarias y acudientes, junto con actividades recientes del sistema.
+
+![Dashboard](screenshots/dashboard.png)
+
+### Registro de Asistencia
+Interfaz para que las madres comunitarias registren la asistencia diaria de los niños, con estados personalizados (Sano, Enfermo, Decaído, No asistió).
+
+![Asistencia](screenshots/asistencia.png)
+
+### Avance Académico
+Sistema de seguimiento del progreso académico de cada niño, permitiendo registrar evaluaciones por nivel educativo.
+
+![Avance Académico](screenshots/avance_academico.png)
+
+### Panel del Acudiente
+Vista personalizada para que los acudientes consulten el avance académico de sus hijos y accedan a publicaciones relevantes.
+
+![Panel Acudiente](screenshots/panel_acudiente.png)
