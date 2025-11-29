@@ -132,7 +132,7 @@ def acudiente_dashboard(request):
 
 @login_required
 def redirect_dashboard(request):
-    return redirect_user_dashboard(request.user)
+    return redirect(redirect_user_dashboard(request.user))
 
 
 @login_required

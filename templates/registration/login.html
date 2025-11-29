@@ -1,71 +1,170 @@
-{% extends 'login_forms.html' %}
-{% load custom_filters %}
+<!DOCTYPE html>
+<html class="light" lang="es">
 
-{% block title %}Iniciar Sesión{% endblock %}
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sistema de Gestión Infantil</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#005A9C",
+                        "background-light": "#F0F2F5",
+                        "background-dark": "#101820",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1D2939",
+                        "text-light": "#333333",
+                        "text-dark": "#F5F5F5",
+                        "text-secondary-light": "#667085",
+                        "text-secondary-dark": "#98A2B3",
+                        "border-light": "#D0D5DD",
+                        "border-dark": "#344054",
+                        "input-bg-light": "#FFFFFF",
+                        "input-bg-dark": "#1D2939",
+                        "success-accent": "#28A745"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
 
-{% block content %}
-
-<div class="max-w-md w-full mx-auto bg-white border border-gray-300 rounded-2xl p-8 shadow-lg transform transition duration-500 hover:scale-105">
-    <!-- Card Header -->
-    <div class="space-y-1 p-4">
-        <h2 class="text-2xl text-center font-bold">Iniciar Sesión</h2>
-        <p class="text-center text-sm text-gray-600">
-            Ingrese sus credenciales para acceder al sistema
-        </p>
-    </div>
-
-    <!-- Card Content -->
-    <div class="p-4">
-        <form method="post">
-            {% csrf_token %}
-            {% if form.non_field_errors %}
-            <div class="mb-4 p-2 bg-red-100 border border-red-400 text-red-700 rounded">
-                {% for error in form.non_field_errors %}
-                <p>{{ error }}</p>
-                {% endfor %}
-            </div>
-            {% endif %}
-            <div class="grid gap-2">
-                <label for="username" class="block text-sm font-medium text-gray-700">Nombre de Usuario</label>
-                {{ form.username|add_class:"block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" }}
-                {% if form.username.errors %}
-                <div class="text-red-500 text-sm mt-1">
-                    {% for error in form.username.errors %}
-                    <p>{{ error }}</p>
-                    {% endfor %}
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+    <div class="relative flex h-screen min-h-screen w-full flex-col overflow-hidden">
+        <header class="absolute top-0 left-0 right-0 z-10 p-6 lg:px-12">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="size-8 text-primary">
+                        <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_6_535)">
+                                <path
+                                    d="M24 0C10.7452 0 0 10.7452 0 24C0 37.2548 10.7452 48 24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0ZM36 21H12V18H36V21ZM30 30H18V27H30V30Z"
+                                    fill="currentColor"></path>
+                            </g>
+                            <defs>
+                                <clippath id="clip0_6_535">
+                                    <rect fill="white" height="48" width="48"></rect>
+                                </clippath>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h2 class="text-text-light dark:text-text-dark text-lg font-bold">Sistema de Gestión Infantil</h2>
                 </div>
-                {% endif %}
             </div>
-            <div class="grid gap-2 mt-4">
-                <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                <div class="relative">
-                    {{ form.password|add_class:"block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" }}
-                    <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400"
-                        onclick="togglePasswordVisibility('{{ form.password.id_for_label }}')">
-                        <i class="fas fa-eye-slash"></i>
-                    </button>
+        </header>
+        <main class="flex h-full w-full items-center justify-center p-6">
+            <div class="container mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
+                <div class="flex flex-col gap-6 text-center lg:text-left">
+                    <div class="flex flex-col gap-4">
+                        <h1
+                            class="text-4xl font-black leading-tight tracking-tight text-text-light dark:text-text-dark lg:text-5xl">
+                            Gestión Integral para el Bienestar Infantil</h1>
+                        <p class="text-base text-text-secondary-light dark:text-text-secondary-dark lg:text-lg">
+                            Centralice y gestione de forma segura toda la información de los niños desde su ingreso
+                            hasta los 5 años, garantizando un seguimiento completo de su desarrollo.</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined mt-1 text-success-accent">check_circle</span>
+                            <div class="flex flex-col text-left">
+                                <h3 class="font-bold text-text-light dark:text-text-dark">Seguimiento de Asistencia</h3>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined mt-1 text-success-accent">check_circle</span>
+                            <div class="flex flex-col text-left">
+                                <h3 class="font-bold text-text-light dark:text-text-dark">Registro de Salud (Talla y
+                                    Peso)</h3>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined mt-1 text-success-accent">check_circle</span>
+                            <div class="flex flex-col text-left">
+                                <h3 class="font-bold text-text-light dark:text-text-dark">Historial de Novedades</h3>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined mt-1 text-success-accent">check_circle</span>
+                            <div class="flex flex-col text-left">
+                                <h3 class="font-bold text-text-light dark:text-text-dark">Reportes Centralizados</h3>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                {% if form.password.errors %}
-                <div class="text-red-500 text-sm mt-1">
-                    {% for error in form.password.errors %}
-                    <p>{{ error }}</p>
-                    {% endfor %}
-                </div>
-                {% endif %}
-            </div>
-            <button class="w-full mt-4 bg-primary hover:bg-[#669f26] text-white font-bold py-2 px-4 rounded"
-                type="submit">
-                <i class="fas fa-sign-in-alt mr-2"></i>
-                Iniciar Sesión
-            </button>
-        </form>
-    </div>
+                <div class="flex w-full max-w-md flex-col justify-center">
+                    <div
+                        class="rounded-xl border border-border-light bg-card-light p-8 shadow-lg dark:border-border-dark dark:bg-card-dark">
+                        <div class="mb-6 flex flex-col gap-1">
+                            <h2 class="text-2xl font-bold text-text-light dark:text-text-dark">Iniciar Sesión</h2>
+                            <p class="text-text-secondary-light dark:text-text-secondary-dark">Ingrese a su cuenta para
+                                continuar.</p>
+                        </div>
 
-    <!-- Card Footer -->
-    <div class="p-4 flex flex-col">
-        <div class="mt-2 text-center text-sm text-gray-600">
-            ¿No tiene una cuenta? <a href="/register" class="text-primary hover:underline">Registrarse</a>
-        </div>
+                        {% if form.non_field_errors %}
+                        <div class="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                            {% for error in form.non_field_errors %}
+                            <p class="text-sm">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <form class="flex flex-col gap-4" method="post">
+                            {% csrf_token %}
+                            <label class="flex flex-col">
+                                <p class="pb-2 text-sm font-medium text-text-light dark:text-text-dark">Contraseña</p>
+                                <div class="flex w-full flex-1 items-stretch rounded-lg">
+                                    <div
+                                        class="material-symbols-outlined flex items-center justify-center rounded-l-lg border border-r-0 border-border-light bg-input-bg-light pl-3.5 text-text-secondary-light dark:border-border-dark dark:bg-input-bg-dark dark:text-text-secondary-dark">
+                                        lock</div>
+                                    <input type="password" name="password"
+                                        class="form-input h-12 w-full flex-1 rounded-r-lg border-l-0 bg-input-bg-light p-3 text-text-light placeholder-text-secondary-light/70 focus:outline-0 focus:ring-2 focus:ring-primary/50 dark:border-border-dark dark:bg-input-bg-dark dark:text-text-dark dark:placeholder-text-secondary-dark/70 dark:focus:ring-primary/60 border-border-light"
+                                        placeholder="Ingrese su contraseña" required id="id_password">
+                                </div>
+                                {% if form.password.errors %}
+                                <p class="text-red-500 text-xs mt-1">{{ form.password.errors.0 }}</p>
+                                {% endif %}
+                            </label>
+                            <div class="flex items-center justify-end">
+                                <!-- <a class="text-sm font-medium text-primary hover:underline" href="#">¿Olvidó su contraseña?</a> -->
+                            </div>
+                            <button type="submit"
+                                class="flex h-12 w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary text-base font-bold text-white transition-colors hover:bg-primary/90">
+                                <span class="truncate">Ingresar</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="absolute bottom-0 left-0 right-0 p-6 text-center">
+            <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">© 2024 Sistema de Gestión
+                Infantil. Todos los derechos reservados.</p>
+        </footer>
     </div>
-</div>
-{% endblock %}
+</body>
+
+</html>

@@ -11,17 +11,32 @@
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    <title>{% block title %}ICBF Management{% endblock %}</title>
+    <title>{% block title %}Sistema de Gestión Infantil{% endblock %}</title>
 </head>
 
 <body class="flex flex-col h-screen overflow-hidden">
     <header class="bg-white shadow-sm border-b z-10 relative">
         <div class="mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 justify-between items-center">
-                <div class="flex items-center">
-                    <img src="https://www.icbf.gov.co/sites/default/files/icbf-logo.png" alt="Logo ICBF"
-                        class="mr-2 h-8 w-8" />
-                    <span class="text-lg font-bold text-primary">ICBF Management</span>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="size-8 text-primary">
+                            <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_6_535)">
+                                    <path
+                                        d="M24 0C10.7452 0 0 10.7452 0 24C0 37.2548 10.7452 48 24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0ZM36 21H12V18H36V21ZM30 30H18V27H30V30Z"
+                                        fill="currentColor"></path>
+                                </g>
+                                <defs>
+                                    <clippath id="clip0_6_535">
+                                        <rect fill="white" height="48" width="48"></rect>
+                                    </clippath>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h2 class="text-text-light dark:text-text-dark text-lg font-bold">Sistema de Gestión Infantil
+                        </h2>
+                    </div>
                 </div>
                 <a href="{% url 'configuration' %}">
                     <div class="flex items-center">
