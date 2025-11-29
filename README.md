@@ -65,6 +65,31 @@ Este proyecto es un sistema de gestión para jardines infantiles. Está diseñad
     EMAIL_HOST_PASSWORD=tu_contraseña
     ```
 
+## Primer Uso - Crear Administrador
+
+Tienes dos opciones para crear el primer usuario administrador:
+
+### Opción 1: Usar datos de prueba (Recomendado para desarrollo)
+
+Si ejecutaste el comando `python manage.py populate` en el paso 10 de la instalación, ya tienes un usuario administrador creado:
+
+- **Username:** `admin`
+- **Password:** `admin`
+
+### Opción 2: Crear un administrador personalizado
+
+Si prefieres crear tu propio usuario administrador:
+
+```bash
+python manage.py createsuperuser
+```
+
+Ingresa los datos solicitados (username, email opcional, password).
+
+---
+
+Una vez creado el administrador, inicia sesión en `http://127.0.0.1:8000/login/` para acceder al dashboard y crear otros usuarios (madres comunitarias, acudientes).
+
 ## Estructura del proyecto
 
 -   `project_core/`: Directorio principal del proyecto
