@@ -67,7 +67,7 @@ Este proyecto es un sistema de gestión para jardines infantiles. Está diseñad
 
 ## Estructura del proyecto
 
--   `project_icbf/`: Directorio principal del proyecto
+-   `project_core/`: Directorio principal del proyecto
     -   `usuarios/`: Aplicación para gestión de usuarios
     -   `jardines/`: Aplicación para gestión de jardines
     -   `niños/`: Aplicación para gestión de niños

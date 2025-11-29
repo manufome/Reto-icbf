@@ -37,7 +37,7 @@ Thumbs.db
 node_modules/
 
 # Archivos de compilación de frontend
-/project_icbf/static/css/dist/
+/project_core/static/css/dist/
 
 # Archivos de caché
 .cache/
